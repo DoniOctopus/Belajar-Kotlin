@@ -1,5 +1,6 @@
 package com.enigmacamp.belajarkotlin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,29 +9,27 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    private var resultView = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        btn_increment.setOnClickListener(this)
-        btn_decrement.setOnClickListener(this)
-        btn_reset.setOnClickListener(this)
+        btn_move1.setOnClickListener(this)
+        btn_move2.setOnClickListener(this)
+        btn_move3.setOnClickListener(this)
+
     }
 
     override fun onClick(v: View?) {
         when(v){
-            btn_increment -> {
-                resultView +=1
-                result.text = resultView.toString()
+            btn_move1 -> {
+                val intent = Intent(this, BuyProduct::class.java)
+                startActivity(intent)
             }
-            btn_decrement ->{
-                resultView -=1
-                result.text = resultView.toString()
+            btn_move2 ->{
+
             }
-            btn_reset ->{
-                resultView = 0
-                result.text = resultView.toString()
+            btn_move3 ->{
+
             }
         }
     }
