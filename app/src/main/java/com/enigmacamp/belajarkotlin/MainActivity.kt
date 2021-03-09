@@ -1,36 +1,56 @@
 package com.enigmacamp.belajarkotlin
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
+import androidx.fragment.app.Fragment
+import com.enigmacamp.belajarkotlin.fragment.BalanceFragment
+import com.enigmacamp.belajarkotlin.fragment.TransactionFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_balance.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
+    lateinit var balanceFragment: BalanceFragment
+    lateinit var transactionFragment: TransactionFragment
+
+    var balance = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        btn_move1.setOnClickListener(this)
-        btn_move2.setOnClickListener(this)
-        btn_move3.setOnClickListener(this)
+        btn_balance.setOnClickListener(this)
+        btn_transaction.setOnClickListener(this)
+        btn_history.setOnClickListener(this)
+        balanceFragment = BalanceFragment()
+        transactionFragment = TransactionFragment()
+    }
 
+    fun handelBuy(stock : Int){
+        balance = balance + stock
+        balanceFragment.updateBalance(balance)
+    }
+    fun handelSell(stock : Int){
+        balance = balance - stock
+        balanceFragment.updateBalance(balance)
     }
 
     override fun onClick(v: View?) {
         when(v){
-            btn_move1 -> {
-                val intent = Intent(this, BuyProduct::class.java)
-                startActivity(intent)
+            btn_balance -> {
+                fragment(balanceFragment)
             }
-            btn_move2 ->{
-
+            btn_transaction ->{
+                fragment(transactionFragment)
             }
-            btn_move3 ->{
+            btn_balance ->{
 
             }
         }
+    }
+
+    private fun fragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager.beginTransaction()
+        fragmentManager.replace(R.id.fragmentContainer, fragment).commit()
     }
 }
