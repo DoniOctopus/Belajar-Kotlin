@@ -5,13 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 import com.enigmacamp.belajarkotlin.MainActivity
 import com.enigmacamp.belajarkotlin.R
-import com.enigmacamp.belajarkotlin.`interface`.TransactionHandler
+import com.enigmacamp.belajarkotlin.viewmodel.PocektViewModel
 import kotlinx.android.synthetic.main.fragment_transcation.*
 
-class TransactionFragment(var transactionHandler: TransactionHandler?=null) : Fragment(), View.OnClickListener {
+class TransactionFragment() : Fragment(), View.OnClickListener {
 
+    lateinit var pocektViewModel : PocektViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +24,7 @@ class TransactionFragment(var transactionHandler: TransactionHandler?=null) : Fr
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        pocektViewModel = ViewModelProviders.of(requireActivity()).get(PocektViewModel::class.java)
         return inflater.inflate(R.layout.fragment_transcation, container, false)
     }
 
@@ -34,10 +37,10 @@ class TransactionFragment(var transactionHandler: TransactionHandler?=null) : Fr
     override fun onClick(v: View?) {
         when(v){
             btn_buy ->{
-                transactionHandler?.handelBuy(textInputTransaction.text.toString().toInt())
+            pocektViewModel.handleIncrement(textInputTransaction.text.toString().toInt())
             }
             btn_sell ->{
-                transactionHandler?.handelSell(textInputTransaction.text.toString().toInt())
+            pocektViewModel.handleDecrement(textInputTransaction.text.toString().toInt())
             }
         }
     }

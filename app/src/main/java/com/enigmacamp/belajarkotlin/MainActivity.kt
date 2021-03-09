@@ -5,18 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.enigmacamp.belajarkotlin.`interface`.TransactionHandler
 import com.enigmacamp.belajarkotlin.fragment.BalanceFragment
 import com.enigmacamp.belajarkotlin.fragment.TransactionFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_balance.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, TransactionHandler {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var balanceFragment: BalanceFragment
     lateinit var transactionFragment: TransactionFragment
-
-    var balance = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,17 +21,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TransactionHandl
         btn_transaction.setOnClickListener(this)
         btn_history.setOnClickListener(this)
         balanceFragment = BalanceFragment()
-        transactionFragment = TransactionFragment(this)
-    }
-
-    override fun handelBuy(stock : Int){
-        balance = balance + stock
-
-        balanceFragment.updateBalance(balance)
-    }
-    override fun handelSell(stock : Int){
-        balance = balance - stock
-        balanceFragment.updateBalance(balance)
+        transactionFragment = TransactionFragment()
     }
 
     override fun onClick(v: View?) {
@@ -47,7 +33,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TransactionHandl
                 fragment(transactionFragment)
             }
             btn_history ->{
-                startActivity(Intent(this,SplitScreenActivity::class.java))
+
             }
         }
     }
