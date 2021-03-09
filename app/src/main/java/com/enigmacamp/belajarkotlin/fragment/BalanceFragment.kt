@@ -30,5 +30,6 @@ class BalanceFragment(var balance: Int = 0) : Fragment() {
 
     fun updateBalance(balance : Int){
         this.balance = balance
+        textViewBalance?.text = this.balance.toString()
     }
 }

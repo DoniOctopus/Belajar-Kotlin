@@ -10,7 +10,7 @@ import com.enigmacamp.belajarkotlin.R
 import com.enigmacamp.belajarkotlin.`interface`.TransactionHandler
 import kotlinx.android.synthetic.main.fragment_transcation.*
 
-class TransactionFragment(var transactionHandler: TransactionHandler) : Fragment(), View.OnClickListener {
+class TransactionFragment(var transactionHandler: TransactionHandler?=null) : Fragment(), View.OnClickListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +34,10 @@ class TransactionFragment(var transactionHandler: TransactionHandler) : Fragment
     override fun onClick(v: View?) {
         when(v){
             btn_buy ->{
-                (activity as MainActivity).handelBuy(textInputTransaction.text.toString().toInt())
+                transactionHandler?.handelBuy(textInputTransaction.text.toString().toInt())
             }
             btn_sell ->{
-                (activity as MainActivity).handelSell(textInputTransaction.text.toString().toInt())
+                transactionHandler?.handelSell(textInputTransaction.text.toString().toInt())
             }
         }
     }

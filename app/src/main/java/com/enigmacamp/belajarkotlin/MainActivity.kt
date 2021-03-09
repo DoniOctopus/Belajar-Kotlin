@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TransactionHandl
 
     override fun handelBuy(stock : Int){
         balance = balance + stock
+
         balanceFragment.updateBalance(balance)
     }
     override fun handelSell(stock : Int){
