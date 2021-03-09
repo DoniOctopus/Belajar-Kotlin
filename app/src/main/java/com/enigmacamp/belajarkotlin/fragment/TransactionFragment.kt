@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.enigmacamp.belajarkotlin.MainActivity
 import com.enigmacamp.belajarkotlin.R
+import com.enigmacamp.belajarkotlin.`interface`.TransactionHandler
 import kotlinx.android.synthetic.main.fragment_transcation.*
 
-class TransactionFragment : Fragment(), View.OnClickListener {
+class TransactionFragment(var transactionHandler: TransactionHandler) : Fragment(), View.OnClickListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
