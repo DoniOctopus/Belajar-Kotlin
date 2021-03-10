@@ -35,10 +35,8 @@ class NavigationFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v){
-           btn_balance -> findNavController().navigate(R.id.action_navigationFragment_to_balanceFragment)
-           btn_transaction -> findNavController().navigate(R.id.action_navigationFragment_to_transactionFragment)
-
+//           btn_balance -> findNavController().navigate(R.id.action_navigationFragment_to_balanceFragment)
+//           btn_transaction -> findNavController().navigate(R.id.action_navigationFragment_to_transactionFragment)
         }
     }
-
 }
