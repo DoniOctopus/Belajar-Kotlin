@@ -11,12 +11,11 @@ import com.enigmacamp.belajarkotlin.fragment.TransactionFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_balance.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, TransactionHandler {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var balanceFragment: BalanceFragment
     lateinit var transactionFragment: TransactionFragment
 
-    var balance = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,18 +24,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TransactionHandl
         btn_transaction.setOnClickListener(this)
         btn_history.setOnClickListener(this)
         balanceFragment = BalanceFragment()
-        transactionFragment = TransactionFragment(this)
+        transactionFragment = TransactionFragment()
     }
 
-    override fun handelBuy(stock : Int){
-        balance = balance + stock
-
-        balanceFragment.updateBalance(balance)
-    }
-    override fun handelSell(stock : Int){
-        balance = balance - stock
-        balanceFragment.updateBalance(balance)
-    }
 
     override fun onClick(v: View?) {
         when(v){
