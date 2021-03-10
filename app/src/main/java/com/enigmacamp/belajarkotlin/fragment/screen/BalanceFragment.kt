@@ -1,18 +1,17 @@
-package com.enigmacamp.belajarkotlin.fragment
+package com.enigmacamp.belajarkotlin.fragment.screen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.enigmacamp.belajarkotlin.MainActivity
 import com.enigmacamp.belajarkotlin.R
-import com.enigmacamp.belajarkotlin.`interface`.TransactionHandler
 import com.enigmacamp.belajarkotlin.viewmodel.PocektViewModel
-import kotlinx.android.synthetic.main.fragment_transcation.*
+import kotlinx.android.synthetic.main.fragment_balance.*
 
-class TransactionFragment() : Fragment(), View.OnClickListener {
+class BalanceFragment() : Fragment() {
 
     lateinit var pocektViewModel : PocektViewModel
 
@@ -26,24 +25,14 @@ class TransactionFragment() : Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         pocektViewModel = ViewModelProvider(requireActivity()).get(PocektViewModel::class.java)
-        return inflater.inflate(R.layout.fragment_transcation, container, false)
+        return inflater.inflate(R.layout.fragment_balance, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btn_sell.setOnClickListener(this)
-        btn_buy.setOnClickListener(this)
-    }
-
-    override fun onClick(v: View?) {
-        when(v){
-            btn_buy ->{
-                pocektViewModel.handleIncrement(textInputTransaction.text.toString().toInt())
-            }
-            btn_sell ->{
-                pocektViewModel.handleDecrement(textInputTransaction.text.toString().toInt())
-            }
+        var balanceObserver : Observer<Int> = Observer {
+            it -> textViewBalance.text = it.toString()
         }
+        pocektViewModel.balance.observe(viewLifecycleOwner,balanceObserver)
     }
-
 }

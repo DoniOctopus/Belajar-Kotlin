@@ -1,4 +1,4 @@
-package com.enigmacamp.belajarkotlin.fragment
+package com.enigmacamp.belajarkotlin.fragment.screen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
